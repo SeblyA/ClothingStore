@@ -44,4 +44,12 @@ public void clearCart(int userId){
         shoppingCartRepository.deleteByUserId(userId);
 }
     // add additional methods here
+    public ShoppingCart updateQuantity(int userId,int productId,int quantity ){
+        CartItem item = shoppingCartRepository.findByUserIdAndProductId(userId,productId);
+        if(item != null){
+            item.setQuantity(quantity);
+            shoppingCartRepository.save(item);
+        }
+        return getByUserId(userId);
+    }
 }
