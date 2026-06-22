@@ -40,9 +40,7 @@ public ShoppingCart addProduct(int userId,int productId){
     }
     return getByUserId(userId);
 }
-public void clearCart(int userId){
-        shoppingCartRepository.deleteByUserId(userId);
-}
+
     // add additional methods here
     public ShoppingCart updateQuantity(int userId,int productId,int quantity ){
         CartItem item = shoppingCartRepository.findByUserIdAndProductId(userId,productId);
@@ -51,5 +49,8 @@ public void clearCart(int userId){
             shoppingCartRepository.save(item);
         }
         return getByUserId(userId);
+    }
+    public void clearCart(int userId){
+        shoppingCartRepository.deleteByUserId(userId);
     }
 }
