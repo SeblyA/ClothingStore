@@ -1,10 +1,15 @@
 package org.yearup.service;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.yearup.models.Category;
 import org.yearup.repository.CategoryRepository;
 
 import java.util.List;
+
 
 @Service
 public class CategoryService
@@ -19,29 +24,29 @@ public class CategoryService
     public List<Category> getAllCategories()
     {
         // get all categories
-        return null;
+        return categoryRepository.findAll();
     }
 
     public Category getById(int categoryId)
     {
         // get category by id
-        return null;
+        return categoryRepository.findById(categoryId).orElse(null);
     }
 
     public Category create(Category category)
     {
         // create a new category
-        return null;
+        return categoryRepository.save(category);
     }
 
-    public Category update(int categoryId, Category category)
+    public Category update( int categoryId, Category category)
     {
         // update category and return the updated category
-        return null;
+        return categoryRepository.save(category);
     }
 
     public void delete(int categoryId)
     {
-        // delete category
+      categoryRepository.deleteById(categoryId) ; // delete category
     }
 }
