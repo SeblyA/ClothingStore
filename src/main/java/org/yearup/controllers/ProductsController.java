@@ -32,7 +32,7 @@ public class ProductsController
         return productService.search(categoryId, minPrice, maxPrice, subCategory);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     @PreAuthorize("permitAll()")
     public Product getById(@PathVariable int id)
     {
@@ -44,7 +44,7 @@ public class ProductsController
         return product;
     }
 
-    @PostMapping()
+    @PostMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Product> addProduct(@RequestBody Product product)
     {
@@ -52,8 +52,8 @@ public class ProductsController
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    @PutMapping("{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Product updateProduct(@PathVariable int id, @RequestBody Product product)
     {
         if (productService.getById(id) == null)
@@ -62,7 +62,7 @@ public class ProductsController
         return productService.update(id, product);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteProduct(@PathVariable int id)
     {
