@@ -1,10 +1,15 @@
 package org.yearup.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import org.yearup.models.CartItem;
 import org.yearup.models.Product;
 import org.yearup.models.ShoppingCart;
+import org.yearup.models.ShoppingCartItem;
 import org.yearup.repository.ShoppingCartRepository;
+
+import java.util.List;
 
 @Service
 public class ShoppingCartService
@@ -19,10 +24,19 @@ public class ShoppingCartService
         this.productService = productService;
     }
 
+    //  load the user's cart rows, look up each product, and build the ShoppingCart
     public ShoppingCart getByUserId(int userId)
     {
-        // load the user's cart rows, look up each product, and build the ShoppingCart
-        return null;
+        ShoppingCart cart = new ShoppingCart();
+        List<CartItem> cartItems = shoppingCartRepository.findByUserId(userId);
+        for(CartItem cartItem : cartItems) {
+            Product product = productService.getById(cartItem.getProductId());
+            ShoppingCartItem item =new ShoppingCartItem();
+            item.setProduct(product);
+            item.setQuantity(cartItem.getQuantity());
+            cart.add(item);
+        }
+        return cart;
     }
 public ShoppingCart addProduct(int userId,int productId){
         //find product
@@ -31,6 +45,11 @@ public ShoppingCart addProduct(int userId,int productId){
     if (existing != null) {
         existing.setQuantity(existing.getQuantity() + 1);
         shoppingCartRepository.save(existing);
+        //Checks the product exists
+        if(product == null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     } else
     {CartItem item = new CartItem();
         item.setUserId(userId);
