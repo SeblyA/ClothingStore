@@ -15,14 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import org.yearup.models.Profile;
+
+import org.yearup.security.jwt.JWTFilter;
+import org.yearup.security.jwt.TokenProvider;
 import org.yearup.service.ProfileService;
 import org.yearup.service.UserService;
 import org.yearup.models.authentication.LoginDto;
 import org.yearup.models.authentication.LoginResponseDto;
 import org.yearup.models.authentication.RegisterUserDto;
 import org.yearup.models.User;
-import org.yearup.security.jwt.JWTFilter;
-import org.yearup.security.jwt.TokenProvider;
+
 
 @RestController
 @CrossOrigin

@@ -70,7 +70,7 @@ public class TokenProvider implements InitializingBean
 
     public Authentication getAuthentication(String token)
     {
-        Claims claims = Jwts.parserBuilder()
+        Claims claims = Jwts.parser()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
@@ -90,7 +90,7 @@ public class TokenProvider implements InitializingBean
     {
         try
         {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(key).build().parseClaimsJws(authToken);
             return true;
         }
         catch (Exception e)
