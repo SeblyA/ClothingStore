@@ -1,6 +1,7 @@
 package org.yearup.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -57,7 +58,14 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
           shoppingCartService.addProduct(user.getId(),productId);
           return  shoppingCartService.getByUserId(user.getId());
       }
-
+    @PostMapping("/cart/add")
+    public ResponseEntity<?> addToCart(@RequestParam int userId,
+                                       @RequestParam int productId,
+                                       @RequestParam int quantity)
+    {
+        shoppingCartService.addProduct(userId,productId);
+        return ResponseEntity.ok("Added to cart");
+    }
 
     // add a PUT method to update an existing product in the cart - the url should be
     // https://localhost:8080/cart/products/15  (15 is the productId to be updated)
@@ -75,16 +83,17 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
 
     // add a DELETE method to clear all products from the current users cart
     // https://localhost:8080/cart  - return the (now empty) cart so the front end can refresh it (200 OK)
-    @DeleteMapping
-    @PreAuthorize("isAuthenticated()")
-    public ShoppingCart deleteCart(Principal principal)
+    @DeleteMapping("/products/{productId}")
+    public ShoppingCart deleteCart(
+            @PathVariable int productId,
+            Principal principal)
     {
-        String userName = principal.getName();
-        User user = userService.getByUserName(userName);
-        int userId = user.getId();
+        User user = userService.getByUserName(principal.getName());
+        shoppingCartService.deleteProduct(
+                user.getId(),
+                productId
+        );
 
-        shoppingCartService.clearCart(userId);
-
-        return shoppingCartService.getByUserId(userId);
+        return shoppingCartService.getByUserId(user.getId());
     }
 }

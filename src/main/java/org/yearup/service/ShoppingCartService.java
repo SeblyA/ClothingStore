@@ -41,15 +41,16 @@ public class ShoppingCartService
 public ShoppingCart addProduct(int userId,int productId){
         //find product
     Product product = productService.getById(productId);
+    if(product == null)
+    {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
     CartItem existing = shoppingCartRepository.findByUserIdAndProductId(userId,productId);
     if (existing != null) {
         existing.setQuantity(existing.getQuantity() + 1);
         shoppingCartRepository.save(existing);
         //Checks the product exists
-        if(product == null)
-        {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
+
     } else
     {CartItem item = new CartItem();
         item.setUserId(userId);
@@ -65,11 +66,11 @@ public ShoppingCart addProduct(int userId,int productId){
         CartItem item = shoppingCartRepository.findByUserIdAndProductId(userId,productId);
         if(item != null){
             item.setQuantity(quantity);
-            shoppingCartRepository.save(item);
+             shoppingCartRepository.save(item);
         }
         return getByUserId(userId);
     }
-    public void clearCart(int userId){
-        shoppingCartRepository.deleteByUserId(userId);
+    public void deleteProduct(int userId, int productId) {
+        shoppingCartRepository.deleteByUserIdAndProductId(userId, productId);
     }
 }

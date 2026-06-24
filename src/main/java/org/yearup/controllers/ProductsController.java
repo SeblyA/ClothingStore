@@ -11,7 +11,7 @@ import org.yearup.service.ProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping("products")
+@RequestMapping("/products")
 @CrossOrigin
 public class ProductsController
 {
@@ -28,6 +28,8 @@ public class ProductsController
                                 @RequestParam(name="minPrice", required = false) Double minPrice,
                                 @RequestParam(name="maxPrice", required = false) Double maxPrice,
                                 @RequestParam(name="subCategory", required = false) String subCategory)
+
+
     {
         return productService.search(categoryId, minPrice, maxPrice, subCategory);
     }

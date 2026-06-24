@@ -18,7 +18,7 @@ public class ProductService
 
     public List<Product> search(Integer categoryId, Double minPrice, Double maxPrice, String subCategory)
     {
-        List<Product> products = categoryId != null
+        List<Product> products = categoryId != null && categoryId > 0
                 ? productRepository.findByCategoryId(categoryId)
                 : productRepository.findAll();
 
@@ -26,7 +26,6 @@ public class ProductService
                        .filter(p -> minPrice == null || p.getPrice() >= minPrice)
                        .filter(p -> maxPrice == null || p.getPrice() <= maxPrice)
                        .filter(p -> subCategory == null || subCategory.equalsIgnoreCase(p.getSubCategory()))
-
                        .toList();
     }
 
