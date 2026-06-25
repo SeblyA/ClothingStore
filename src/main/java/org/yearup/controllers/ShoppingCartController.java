@@ -16,6 +16,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/cart")
 @PreAuthorize("isAuthenticated()")
+@CrossOrigin
 // convert this class to a REST controller
 // only logged in users should have access to these actions
 public class ShoppingCartController
@@ -49,22 +50,25 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
     // return the updated cart with status 201 Created
 
       @PostMapping("/products/{productId}")
+      @PreAuthorize ("isAuthenticated()")
       @ResponseStatus(HttpStatus.CREATED)
       public ShoppingCart addProduct(@PathVariable int productId,Principal principal)
       {
+          System.out.println("Principal="+principal);
           String userName = principal.getName();
           User user = userService.getByUserName(userName);
           int userId = user.getId();
           shoppingCartService.addProduct(user.getId(),productId);
           return  shoppingCartService.getByUserId(user.getId());
       }
-    @PostMapping("/cart/add")
-    public ResponseEntity<?> addToCart(@RequestParam int userId,
-                                       @RequestParam int productId,
-                                       @RequestParam int quantity)
+    @PostMapping("/cart/products")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> addToCart(@PathVariable int productId,
+                                       Principal principal)
     {
-        shoppingCartService.addProduct(userId,productId);
-        return ResponseEntity.ok("Added to cart");
+        User user = userService.getByUserName(principal.getName());
+        shoppingCartService.addProduct(user.getId(),productId);
+        return ResponseEntity.ok(shoppingCartService.getByUserId(user.getId()));
     }
 
     // add a PUT method to update an existing product in the cart - the url should be
@@ -83,10 +87,20 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
 
     // add a DELETE method to clear all products from the current users cart
     // https://localhost:8080/cart  - return the (now empty) cart so the front end can refresh it (200 OK)
+    @DeleteMapping
+    @PreAuthorize("isAuthenticated()")
+    public ShoppingCart clearCart( Principal principal)
+    {
+        User user = userService.getByUserName(principal.getName());
+        shoppingCartService.clearCart(user.getId()
+        );
+
+        return shoppingCartService.getByUserId(user.getId());
+    }
+    //This Deletes products by Id
     @DeleteMapping("/products/{productId}")
-    public ShoppingCart deleteCart(
-            @PathVariable int productId,
-            Principal principal)
+    @PreAuthorize("isAuthenticated()")
+    public ShoppingCart deleteProduct(@PathVariable int productId, Principal principal)
     {
         User user = userService.getByUserName(principal.getName());
         shoppingCartService.deleteProduct(

@@ -42,7 +42,7 @@ private ProductRepository productRepository;
 
 
         assertEquals(1,result.size());
-        assertEquals("Nike Shoes",
+        assertEquals("Flannel Shirt",
                 result.get(0).getName());
     }
     }
