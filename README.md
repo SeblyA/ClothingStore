@@ -8,6 +8,9 @@ A full-stack e-commerce clothing store application that allows users to browse p
 
 The Clothing Store application provides a seamless online shopping experience where users can browse clothing products, search using different filters, and purchase items through a shopping cart.
 
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/b39663a1-2ada-4be8-90e4-4e92e9cc7ffe" />
+
+
 Users can:
 
 * Browse all available products
@@ -23,6 +26,8 @@ Users can:
 # ✨ Features
 
 ## User Features
+<img width="300" height="350" alt="image" src="https://github.com/user-attachments/assets/b020ff79-7243-4d86-9a44-1fa6d13a2e49" />
+
 
 * User registration
 * User login and authentication
@@ -37,7 +42,6 @@ Users can:
 * Filter products by:
 
   * Category (Top, Bottom, Shoes)
-  * Category ID
   * Color
   * Price range ($0 – $900)
 * Add products to shopping cart
