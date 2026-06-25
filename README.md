@@ -218,6 +218,32 @@ ecommerce-api-starter/
 
 
 ```
+### Interesting Code : Updating a User Profile
+
+ **profile update service**. 
+* This method demonstrates how an existing user profile is safely updated by retrieving the current record from the database, modifying only the necessary fields, and then saving the updated entity.
+* Retrieves the existing profile instead of creating a new database record.
+* Updates only the fields that have changed while preserving the original entity.
+
+
+```java
+public Profile update(int userId, Profile profile) {
+    Profile existing = profileRepository.findByUserId(userId);
+
+    existing.setFirstName(profile.getFirstName());
+    existing.setLastName(profile.getLastName());
+    existing.setPhone(profile.getPhone());
+    existing.setEmail(profile.getEmail());
+    existing.setAddress(profile.getAddress());
+    existing.setCity(profile.getCity());
+    existing.setState(profile.getState());
+    existing.setZip(profile.getZip());
+
+    return profileRepository.save(existing);
+}
+```
+
+
 
 # Future Enhancements
 
