@@ -41,6 +41,7 @@ public class ShoppingCartService {
     public ShoppingCart addProduct(int userId, int productId) {
         //find product
         Product product = productService.getById(productId);
+
         if (product == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

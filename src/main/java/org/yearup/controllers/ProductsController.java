@@ -52,6 +52,7 @@ public class ProductsController
     {
         Product saved = productService.create(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+
     }
 
     @PutMapping("/{id}")
