@@ -1,4 +1,4 @@
-# 👕 Clothing Store
+# 🛍 Clothing Store
 
 A full-stack e-commerce clothing store application that allows users to browse products, filter by multiple criteria, manage their shopping cart, and maintain their personal profile.
 
@@ -43,7 +43,7 @@ Users can:
 
 ---
 
-# 🛍 Product Categories
+# 👕 Product Categories
 
 The application currently supports the following categories:
 
