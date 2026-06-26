@@ -26,7 +26,6 @@ Users can:
 # ✨ Features
 
 ## User Features
-<img width="300" height="350" alt="image" src="https://github.com/user-attachments/assets/b020ff79-7243-4d86-9a44-1fa6d13a2e49" />
 
 
 * User registration
@@ -37,13 +36,7 @@ Users can:
   * Name
   * Email address
   * Phone number
-* Browse products
-* Search products
-* Filter products by:
-
-  * Category (Top, Bottom, Shoes)
-  * Color
-  * Price range ($0 – $900)
+    
 * Add products to shopping cart
 * View shopping cart contents
 * Clear all items from the shopping cart
@@ -152,6 +145,8 @@ Users can manage their personal information including:
 * Phone Number
 
 Profiles can be created or updated at any time.
+
+<img width="300" height="350" alt="image" src="https://github.com/user-attachments/assets/b020ff79-7243-4d86-9a44-1fa6d13a2e49" />
 
 ---
 
