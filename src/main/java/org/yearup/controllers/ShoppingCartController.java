@@ -15,10 +15,10 @@ import org.yearup.service.UserService;
 import java.security.Principal;
 @RestController
 @RequestMapping("/cart")
+// only logged in users should have access to these actions
 @PreAuthorize("isAuthenticated()")
 @CrossOrigin
-// convert this class to a REST controller
-// only logged in users should have access to these actions
+
 public class ShoppingCartController
 {
     // a shopping cart controller depends on the service layer
@@ -29,9 +29,7 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
     this.userService = userService;
 }
 
-
-
-    // each method in this controller requires a Principal object as a parameter
+    // each method in this controller requires a Principal object as a parameter ("IsAuthenticated")
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ShoppingCart getCart(Principal principal) {
@@ -45,13 +43,12 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
         // use the shoppingCartService to get all items in the cart and return the cart
         return shoppingCartService.getByUserId(user.getId());
     }
-// add a POST method to add a product to the cart - the url should be
-    // https://localhost:8080/cart/products/15  (15 is the productId to be added)
-    // return the updated cart with status 201 Created
 
+      //  a POST method to add a product to the cart
       @PostMapping("/products/{productId}")
       @PreAuthorize ("isAuthenticated()")
       @ResponseStatus(HttpStatus.CREATED)
+      // return the updated cart with status 201 Created
       public ShoppingCart addProduct(@PathVariable int productId,Principal principal)
       {
           System.out.println("Principal="+principal);
@@ -71,9 +68,6 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
         return ResponseEntity.ok(shoppingCartService.getByUserId(user.getId()));
     }
 
-    // add a PUT method to update an existing product in the cart - the url should be
-
-    // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated; return the cart (200 OK)
 @PutMapping("/products/{productId}")
     public ShoppingCart updateProduct(@PathVariable int productId, @RequestBody ShoppingCartItem item, Principal principal )
     {
@@ -85,7 +79,7 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
         return shoppingCartService.getByUserId(userId);
     }
 
-    // add a DELETE method to clear all products from the current users cart
+    //  clear all products from the current users cart
 
     @DeleteMapping
     @PreAuthorize("isAuthenticated()")

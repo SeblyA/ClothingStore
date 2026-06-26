@@ -50,7 +50,6 @@ public class ShoppingCartService {
             existing.setQuantity(existing.getQuantity() + 1);
             shoppingCartRepository.save(existing);
             //Checks the product exists
-
         } else {
             CartItem item = new CartItem();
             item.setUserId(userId);
@@ -61,7 +60,7 @@ public class ShoppingCartService {
         return getByUserId(userId);
     }
 
-    // add additional methods here
+    // add additional methods to update
     public ShoppingCart updateQuantity(int userId, int productId, int quantity) {
         CartItem item = shoppingCartRepository.findByUserIdAndProductId(userId, productId);
         if (item != null) {
@@ -79,7 +78,6 @@ public class ShoppingCartService {
             shoppingCartRepository.delete(item);
         }
     }
-
 
     public void clearCart(int userId) {
         List<CartItem> items = shoppingCartRepository.findByUserId(userId);

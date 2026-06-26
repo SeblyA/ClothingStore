@@ -33,7 +33,7 @@ public CategoriesController(CategoryService categoryService, ProductService prod
         return categoryService.getAllCategories();
     }
 
-    // add the appropriate annotation for a get action
+    //  annotation for a get action
     @GetMapping("/{id}")
     public Category getById(@PathVariable int id)
     {
@@ -62,8 +62,7 @@ public CategoriesController(CategoryService categoryService, ProductService prod
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
-    // add annotation to ensure that only an ADMIN can call this function
+    //  ensure that only an ADMIN can call this function
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Category updateCategory(@PathVariable int id, @RequestBody Category category)
@@ -72,9 +71,6 @@ public CategoriesController(CategoryService categoryService, ProductService prod
         return categoryService.update(id, category);
     }
 
-
-    // add annotation to call this method for a DELETE action - the url path must include the categoryId
-    // add annotation to ensure that only an ADMIN can call this function
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCategory(@PathVariable int id)
