@@ -32,7 +32,6 @@ private ProductRepository productRepository;
         top.setCategoryId(2);
         top.setName("Tops");
 
-
         when(productRepository.findByCategoryId(1))
                 .thenReturn(List.of(shoes));
 

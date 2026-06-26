@@ -29,4 +29,5 @@ class ProductRepositoryTest
         assertNotNull(actual, "Because product 1 should exist in the test database.");
         assertEquals(499.99, actual.getPrice(), 0.001, "Because I tried to get product 1 from the database.");
     }
+
 }

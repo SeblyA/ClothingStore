@@ -38,7 +38,6 @@ public class ShoppingCart
                             .stream()
                             .mapToDouble(i -> i.getLineTotal())
                             .sum();
-
         return total;
     }
 

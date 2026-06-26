@@ -13,10 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/categories")
 @CrossOrigin
-// add the annotations to make this a REST controller
-// add the annotation to make this controller the endpoint for the following url
-    // http://localhost:8080/categories
-// add annotation to allow cross site origin requests
+
+// annotation to allow cross site origin requests
 public class CategoriesController
 {
     private CategoryService categoryService;
@@ -27,7 +25,7 @@ public CategoriesController(CategoryService categoryService, ProductService prod
     this.productService = productService;
 }
 
-    // add the appropriate annotation for a get action
+    //  appropriate annotation for a get action
     @GetMapping
     public List<Category> getAll()
     {
@@ -43,8 +41,8 @@ public CategoriesController(CategoryService categoryService, ProductService prod
         return categoryService.getById(id);
     }
 
-    // the url to return all products in category 1 would look like this
-    // https://localhost:8080/categories/1/products
+    // the url to return all products in category
+
     @GetMapping("/{categoryId}/products")
     public List<Product> getProductsById(@PathVariable int categoryId)
     {
@@ -52,8 +50,8 @@ public CategoriesController(CategoryService categoryService, ProductService prod
         return productService.listByCategoryId(categoryId);
     }
 
-    // add annotation to call this method for a POST action
-    // add annotation to ensure that only an ADMIN can call this function
+    // to call this method for a POST action
+    // to ensure that only an ADMIN can call this function
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")

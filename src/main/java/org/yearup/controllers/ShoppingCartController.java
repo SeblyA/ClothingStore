@@ -72,7 +72,7 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
     }
 
     // add a PUT method to update an existing product in the cart - the url should be
-    // https://localhost:8080/cart/products/15  (15 is the productId to be updated)
+
     // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated; return the cart (200 OK)
 @PutMapping("/products/{productId}")
     public ShoppingCart updateProduct(@PathVariable int productId, @RequestBody ShoppingCartItem item, Principal principal )
@@ -86,7 +86,7 @@ public ShoppingCartController(ShoppingCartService shoppingCartService, UserServi
     }
 
     // add a DELETE method to clear all products from the current users cart
-    // https://localhost:8080/cart  - return the (now empty) cart so the front end can refresh it (200 OK)
+
     @DeleteMapping
     @PreAuthorize("isAuthenticated()")
     public ShoppingCart clearCart( Principal principal)

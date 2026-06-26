@@ -86,4 +86,5 @@ public class ShoppingCartService {
 
         shoppingCartRepository.deleteAll(items);
     }
+
 }

@@ -22,6 +22,5 @@ class ProfileTest {
         profile.setLastName("Assefa");
         String actual = profile.getLastName();
         assertEquals("Assefa", actual);
-
     }
 }

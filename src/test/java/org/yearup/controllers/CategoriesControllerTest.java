@@ -19,6 +19,5 @@ class CategoriesControllerTest {
         savedCategory.setCategoryId(3);
         savedCategory.setName("Shoes");
 
-
     }
 }
